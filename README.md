@@ -5,7 +5,8 @@
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Functional requirements
-- [ ] Register user.
+- [X] Register user.
+- [X] Share user.
 - [ ] Authenticate user.
 - [ ] Edit user.
 ### Non-functional requirements
@@ -13,6 +14,8 @@
 - [X] TypeScript.
 - [X] NodeJs.
 - [X] TypeORM.
+- [X] JWT (Json Web Token).
+- [X] Dotenv.
 
 ------------------------------------------------------------------------------------------------------------------------
 *Português (Brasil)*
@@ -20,7 +23,8 @@
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Requisitos funcionais
-- [ ] Cadastrar usuário.
+- [X] Cadastrar usuário.
+- [X] Buscar usuário.
 - [ ] Autenticar usuário.
 - [ ] Editar usuário.
 ### Requisitos não funcionais
@@ -28,3 +32,5 @@
 - [X] TypeScript.
 - [X] NodeJs.
 - [X] TypeORM.
+- [X] JWT (Json Web Token).
+- [X] Dotenv.
