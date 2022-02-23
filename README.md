@@ -7,7 +7,7 @@
 ### Functional requirements
 - [X] Register user.
 - [X] Share user.
-- [ ] Authenticate user.
+- [X] Authenticate user.
 - [ ] Edit user.
 ### Non-functional requirements
 **Technologies**
@@ -25,7 +25,7 @@
 ### Requisitos funcionais
 - [X] Cadastrar usuário.
 - [X] Buscar usuário.
-- [ ] Autenticar usuário.
+- [X] Autenticar usuário.
 - [ ] Editar usuário.
 ### Requisitos não funcionais
 **Tecnologias**
