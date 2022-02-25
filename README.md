@@ -16,6 +16,7 @@
 - [X] TypeORM.
 - [X] JWT (Json Web Token).
 - [X] Dotenv.
+- [X] Middlewares
 
 ------------------------------------------------------------------------------------------------------------------------
 *Português (Brasil)*
@@ -34,3 +35,4 @@
 - [X] TypeORM.
 - [X] JWT (Json Web Token).
 - [X] Dotenv.
+- [X] Middlewares
