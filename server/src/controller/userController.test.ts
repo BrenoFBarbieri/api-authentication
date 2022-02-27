@@ -3,27 +3,25 @@ import { describe, test, expect } from '@jest/globals';
 import 'jest'
 import * as request from 'supertest'
 
-const user = {
-    name: 'User Test',
-    email: 'user.test@gmail.com',
-    password: 'test'
-}
-
-describe('new user flow', () => {
+describe('New User Flow', () => {
     test('/signup post', () => {
         return request('http://localhost:3333')
             .post('/signup')
-            .send(user)
+            .send({
+                name: 'User Test',
+                email: 'user.test@gmail.com',
+                password: '123456'
+            })
             .then(response => {
                 expect(response.status).toBe(201)
                 expect(typeof response.body.id).toBe("number")
-                expect(response.body.name).toBe(user.name)
-                expect(response.body.email).toBe(user.email)
-                expect(response.body.password).not.toBe(user.password)
+                expect(response.body.name).toBe('User Test')
+                expect(response.body.email).toBe('user.test@gmail.com')
+                expect(response.body.password).not.toBe('123456')
             })
     })
 
-    test('/signup no data post ', () => {
+    test('/signup No Data Post ', () => {
         return request('http://localhost:3333')
             .post('/signup')
             .send({
@@ -33,27 +31,45 @@ describe('new user flow', () => {
             })
             .then(response => {
                 expect(response.status).toBe(204)
-                expect(typeof response.body.id).not.toBe("number")
-                expect(response.body.name).not.toBe(user.name)
-                expect(response.body.email).not.toBe(user.email)
-                expect(response.body.password).not.toBe(user.password)
             })
     })
 
-    test('/signup full name', () => {
+    test('/signup Validating Full Name', () => {
         return request('http://localhost:3333')
             .post('/signup')
             .send({
                 name: 'User',
                 email: 'user.test@gmail.com',
+                password: '123456'
+            })
+            .then(response => {
+                expect(response.status).toBe(204)
+            })
+    })
+
+    test('/signup Validating Email', () => {
+        return request('http://localhost:3333')
+            .post('/signup')
+            .send({
+                name: 'User Test',
+                email: 'user.testasfasg',
                 password: 'test'
             })
             .then(response => {
                 expect(response.status).toBe(204)
-                expect(typeof response.body.id).not.toBe("number")
-                expect(response.body.name).not.toBe(user.name)
-                expect(response.body.email).not.toBe(user.email)
-                expect(response.body.password).not.toBe(user.password)
             })
     })
+
+    test('/signup Validating Password', () => {
+        return request('http://localhost:3333')
+            .post('/signup')
+            .send({
+                name: 'User Test',
+                email: 'user.test@gmail.com',
+                password: '12345'
+            })
+            .then(response => {
+                expect(response.status).toBe(204)
+            })
+    })  
 })
