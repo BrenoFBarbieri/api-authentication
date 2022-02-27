@@ -7,9 +7,13 @@
       "target": "es5",
       "module": "commonjs",
       "moduleResolution": "node",
+      "types": ["@types/jest"],
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
-   }
+      "sourceMap": true,
+   },
+   "exclude": [
+      "**/*.test.ts"
+   ]
 }
