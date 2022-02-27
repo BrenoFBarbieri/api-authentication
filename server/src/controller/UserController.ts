@@ -26,6 +26,21 @@ export const signup = async (request: Request, response: Response) => {
     // Obtendo valores do body da requisição
     const { name, email, password } = request.body
 
+    // Checks if it contains data, if it does not, it returns an error warning and does not proceed with the creation of the user
+    // Verifica se contém dados, se não conter, ele retorna um erro avisando e não segue na criação do usuário
+    if(!name) {
+        return response.status(204).json({ message: 'name is required' })
+    } else if (!email) {
+        return response.status(204).json({ message: 'email is required' })
+    } else if(!password) {
+        return response.status(204).json({ message: 'password is required' })
+    }
+
+    const checkFirstLastName = name.split(' ')
+    if(checkFirstLastName.length <= 1) {
+        return response.status(204).json({ message: 'Full name is required' })
+    }
+
     // Encrypting the password obtained in the body of the request
     // Criptografando a senha obtida no body da requisição
     const passwordHash = await bcrypt.hash(password, 8)
@@ -40,7 +55,7 @@ export const signup = async (request: Request, response: Response) => {
 
     // Returning the created object
     // Retornando o objeto criado
-    return response.json(user)
+    return response.status(201).json(user)
 }
 
 // Function responsible for validating credentials

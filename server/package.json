@@ -4,10 +4,6 @@
    "description": "Authentication API for study and portfolio purposes",
    "author": "Breno Barbieri",
    "type": "commonjs",
-   "jest": {
-      "bail": 1,
-      "verbose": true
-   },
    "devDependencies": {
       "@types/bcrypt": "^5.0.0",
       "@types/express": "^4.17.13",
