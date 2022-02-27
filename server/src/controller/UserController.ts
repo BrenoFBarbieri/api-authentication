@@ -14,17 +14,23 @@ import * as bcrypt from 'bcrypt'
 // Responsável por gerar o web token
 import * as jwt from 'jsonwebtoken' 
 
+interface IUser {
+    name: string,
+    email: string,
+    password: string
+}
+
 // ******************************************************************************************************* \\
 // !! Function arranged in user flow order
 // !! Função organizada por ordem do fluxo de usuário
-
+// ******************************************************************************************************* \\
 
 // Function responsible for creating the user
 // Função responsável por criar o usuário
 export const signup = async (request: Request, response: Response) => {
     // Getting values from the request body
     // Obtendo valores do body da requisição
-    const { name, email, password } = request.body
+    const { name, email, password }: IUser = request.body
 
     // Checks if it contains data, if it does not, it returns an error warning and does not proceed with the creation of the user
     // Verifica se contém dados, se não conter, ele retorna um erro avisando e não segue na criação do usuário
@@ -36,11 +42,28 @@ export const signup = async (request: Request, response: Response) => {
         return response.status(204).json({ message: 'password is required' })
     }
 
+    // Checking full name
+    // Verificando nome completo
     const checkFirstLastName = name.split(' ')
     if(checkFirstLastName.length <= 1) {
         return response.status(204).json({ message: 'Full name is required' })
     }
 
+    // Validating the password
+    // Validando a senha
+    const emailIsValid: boolean = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi
+        .test(email)
+    if(!emailIsValid) {
+        return response.status(204).json({ message: 'Invalid email' })
+    }
+
+    // Validating password
+    // Validando senha
+    const passwordSplit = password.split('')
+    if(passwordSplit.length < 6) {
+        return response.status(204).json({ message: 'Password must contain at least 6 digits' })
+    }
+    
     // Encrypting the password obtained in the body of the request
     // Criptografando a senha obtida no body da requisição
     const passwordHash = await bcrypt.hash(password, 8)
